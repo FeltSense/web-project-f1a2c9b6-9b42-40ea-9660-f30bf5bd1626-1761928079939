@@ -6,12 +6,12 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
@@ -54,7 +54,7 @@ export default function ContactForm() {
     {/* Floating Modal Card */}
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 md:p-12 backdrop-blur-sm">
-        <div className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name Input */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
@@ -134,7 +134,7 @@ export default function ContactForm() {
           <p className="text-sm text-gray-500 text-center mt-4">
             We'll get back to you within 24 hours
           </p>
-        </div>
+        </form>
       </div>
     </div>
   </div>
